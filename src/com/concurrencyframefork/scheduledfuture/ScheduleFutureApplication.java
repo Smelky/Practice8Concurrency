@@ -14,6 +14,7 @@ public class ScheduleFutureApplication {
             System.out.println("returning result");
             return ThreadLocalRandom.current().nextLong();
         }, 2, TimeUnit.SECONDS);
+
         long delay = scheduleFuture.getDelay(TimeUnit.SECONDS);
         System.out.println("task scheduled");
         System.out.println("remaining delay: " + delay);

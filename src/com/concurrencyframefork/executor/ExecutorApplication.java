@@ -23,7 +23,7 @@ public class ExecutorApplication {
             Integer result = futureTask1.get(5, TimeUnit.SECONDS);
             System.out.println("Get future result : " + result);
             otherTask("After Future Result");
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             executor.shutdown();

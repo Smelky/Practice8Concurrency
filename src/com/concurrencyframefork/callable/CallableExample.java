@@ -13,6 +13,5 @@ public class CallableExample implements Callable {
 
         return randomNumber;
     }
-
 }
 
