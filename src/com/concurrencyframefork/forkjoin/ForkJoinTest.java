@@ -7,33 +7,33 @@ import java.util.stream.LongStream;
 
 public class ForkJoinTest extends RecursiveTask<Long> {
 
-    private final long[] NUMBERS;
-    private final int START;
-    private final int END;
+    private final long[] numbers;
+    private final int start;
+    private final int end;
     private static final long THRESHOLD = 10_000;
 
-    private ForkJoinTest(long[] NUMBERS) {
-        this(NUMBERS, 0, NUMBERS.length);
+    private ForkJoinTest(long[] numbers) {
+        this(numbers, 0, numbers.length);
     }
 
     private ForkJoinTest(long[] numbers, int start, int end) {
-        this.NUMBERS = numbers;
-        this.START = start;
-        this.END = end;
+        this.numbers = numbers;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     protected Long compute() {
 
-        int length = END - START;
+        int length = end - start;
         if (length <= THRESHOLD) {
             return add();
         }
 
-        ForkJoinTest firstTask = new ForkJoinTest(NUMBERS, START, START + length / 2);
+        ForkJoinTest firstTask = new ForkJoinTest(numbers, start, start + length / 2);
         firstTask.fork();
 
-        ForkJoinTest secondTask = new ForkJoinTest(NUMBERS, START + length / 2, END);
+        ForkJoinTest secondTask = new ForkJoinTest(numbers, start + length / 2, end);
 
         Long secondTaskResult = secondTask.compute();
         Long firstTaskResult = firstTask.join();
@@ -43,8 +43,8 @@ public class ForkJoinTest extends RecursiveTask<Long> {
 
     private long add() {
         long result = 0;
-        for (int i = START; i < END; i++) {
-            result += NUMBERS[i];
+        for (int i = start; i < end; i++) {
+            result += numbers[i];
         }
         return result;
     }
