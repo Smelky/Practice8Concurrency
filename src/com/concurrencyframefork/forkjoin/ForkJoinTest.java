@@ -12,8 +12,8 @@ public class ForkJoinTest extends RecursiveTask<Long> {
     private final int END;
     private static final long THRESHOLD = 10_000;
 
-    private ForkJoinTest(long[] numbers) {
-        this(numbers, 0, numbers.length);
+    private ForkJoinTest(long[] NUMBERS) {
+        this(NUMBERS, 0, NUMBERS.length);
     }
 
     private ForkJoinTest(long[] numbers, int start, int end) {
@@ -39,7 +39,6 @@ public class ForkJoinTest extends RecursiveTask<Long> {
         Long firstTaskResult = firstTask.join();
 
         return firstTaskResult + secondTaskResult;
-
     }
 
     private long add() {
